@@ -4,6 +4,12 @@ const colors = document.getElementsByClassName("jsColor");
 const ranges = document.getElementById("jsRange");
 const button = document.getElementById("jsMode");
 
+const body = window.getComputedStyle(document.body);
+
+if(body) {
+    document.body.style.setProperty('cursor', "url(image/brushCursor.png), default");
+}
+
 const INITIAL_COLOR = "2c2c2c";
 
 canvas.width = document.getElementsByClassName("canvas")[0].offsetWidth;
@@ -13,7 +19,9 @@ ctx.strokeStyle = INITIAL_COLOR;
 ctx.fillStyle = INITIAL_COLOR;
 ctx.lineWidth = 2.5;
 
+// 선그리기 변수
 let painting = false;
+// 채우기 변수
 let filling = false;
 
 function stopPainting() {
@@ -25,9 +33,10 @@ function startPainting() {
 }
 
 function onMouseMove(event) {
+
     const x = event.offsetX;
     const y = event.offsetY;
-    
+
     if(!painting) {
         ctx.beginPath();
         ctx.moveTo(x, y);
@@ -52,9 +61,11 @@ function handleModeClick(event) {
     if(filling === true) {
         filling = false;
         button.innerText = "Fill";
+        document.body.style.setProperty('cursor', "url(image/brushCursor.png), default");
     } else {
         filling = true;
         button.innerText = "Paint";
+        document.body.style.setProperty('cursor', "url(image/paintCursor.png), default");
     }
 }
 
