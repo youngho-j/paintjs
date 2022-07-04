@@ -52,9 +52,14 @@ function onMouseMove(event) {
 }
 
 function handleColorClick(event) {
+    // 선택된 색상 초기화
+    Array.from(colors).forEach(color => color.style.border = "none");
+    
     const color = event.target.style.backgroundColor;
+    
     ctx.strokeStyle = color;
     ctx.fillStyle = color;
+    event.target.style.setProperty("border", "dotted");
 }
 
 function handleRangeClick(event) {
